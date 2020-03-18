@@ -101,11 +101,22 @@ void compileBlock5(void)
 void compileConstDecls(void)
 {
   // TODO
+  if (lookAhead->tokenType == TK_IDENT)
+  {
+    compileConstDecl();
+    compileConstDecls();
+  }
 }
 
 void compileConstDecl(void)
 {
   // TODO
+  assert("Parsing Const Decl");
+  eat(TK_IDENT);
+  eat(SB_EQ);
+  compileConstant();
+  eat(SB_SEMICOLON);
+  assert("Const Decl Parsed");
 }
 
 void compileTypeDecls(void)
@@ -237,7 +248,18 @@ void compileAssignSt(void)
 {
   assert("Parsing an assign statement ....");
   // TODO
+  eat(TK_IDENT);
+
   assert("Assign statement parsed ....");
+}
+
+void compileAssignStUpdate(void)
+{
+  assert("Parsing an assign statement update for multi....");
+  // TODO
+  eat(TK_IDENT);
+
+  assert("Assign statement update parsed ....");
 }
 
 void compileCallSt(void)
