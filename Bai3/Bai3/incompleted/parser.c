@@ -244,23 +244,25 @@ void compileStatement(void)
   }
 }
 
+// Nâng cấp lên thành đọc nhiều biến; nhiều hàm !
+
 void compileAssignSt(void)
 {
   assert("Parsing an assign statement ....");
   // TODO
   eat(TK_IDENT);
-
+  // eat()
   assert("Assign statement parsed ....");
 }
 
-void compileAssignStUpdate(void)
-{
-  assert("Parsing an assign statement update for multi....");
-  // TODO
-  eat(TK_IDENT);
+// void compileAssignStUpdate(void)
+// {
+//   assert("Parsing an assign statement update for multi....");
+//   // TODO
+//   eat(TK_IDENT);
 
-  assert("Assign statement update parsed ....");
-}
+//   assert("Assign statement update parsed ....");
+// }
 
 void compileCallSt(void)
 {
