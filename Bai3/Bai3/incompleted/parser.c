@@ -393,33 +393,72 @@ void compileStatement(void)
     break;
     // Error occurs
   default:
-    error(ERR_INVALIDSTATEMENT, lookAhead->lineNo, lookAhead->colNo);
+    error(ERR_INVALIDSTATEMENT, currentToken->lineNo, currentToken->colNo);
     break;
   }
 }
 
 // Nâng cấp lên thành đọc nhiều biến; nhiều hàm !
 
-/// Ken-tou shi masu
+// Hàm ban đầu !
+// void compileAssignSt(void)
+// {
+//   assert("Parsing an assign statement ....");
+//   // TODO
+//   eat(TK_IDENT);
+//   compileIndexes();
+//   eat(SB_ASSIGN);
+//   compileExpression();
+//   assert("Assign statement parsed ....");
+// }
+
+// ************* START UPDATE *************
+// x, y, … , z  := <Expression>, <Expression>, … , <Expression>
+
+// AssignST ::= VariableFunctions SB_ASSIGN Expressions
 void compileAssignSt(void)
 {
   assert("Parsing an assign statement ....");
-  // TODO
-  eat(TK_IDENT);
-  compileIndexes();
+
+  compileVariableFunctions();
   eat(SB_ASSIGN);
-  compileExpression();
+  compileExpressions();
+
   assert("Assign statement parsed ....");
 }
 
-// void compileAssignStUpdate(void)
-// {
-//   assert("Parsing an assign statement update for multi....");
-//   // TODO
-//   eat(TK_IDENT);
+// VariableFunctions ::= VariableFunction SB_COMMA VariableFunctions
+void compileVariableFunctions(void)
+{
+  if (lookAhead->tokenType == TK_IDENT)
+  {
+    compileVariableFunction();
 
-//   assert("Assign statement update parsed ....");
-// }
+    if (lookAhead->tokenType != SB_COMMA)
+      return;
+    eat(SB_COMMA);
+    compileVariableFunctions();
+  }
+}
+
+void compileVariableFunction(void)
+{
+  eat(TK_IDENT);
+  compileIndexes();
+}
+
+// Expressions ::= Expression SB_COMMA Expressions
+// Expressions ::= Expression
+void compileExpressions(void)
+{
+  compileExpression();
+  if (lookAhead->tokenType != SB_COMMA)
+    return;
+  eat(SB_COMMA);
+  compileExpressions();
+}
+
+// ************* END UPDATE *************
 
 void compileCallSt(void)
 {
@@ -612,13 +651,13 @@ void compileFactor(void)
     compileIndexes();
     compileArguments();
     break;
-
   case SB_LPAR:
     eat(SB_LPAR);
     compileExpression();
     eat(SB_RPAR);
     break;
   default:
+    error(ERR_INVALIDFACTOR, lookAhead->lineNo, lookAhead->colNo);
     break;
   }
 }

@@ -55,6 +55,12 @@ void compileTerm2(void);
 void compileFactor(void);
 void compileIndexes(void);
 
+// UPDATE
+void compileVariableFunctions(void);
+void compileVariableFunction(void);
+void compileExpressions(void);
+// END UDPATE
+
 int compile(char *fileName);
 
 #endif
