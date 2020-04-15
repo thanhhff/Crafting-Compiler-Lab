@@ -4,13 +4,13 @@ Var n : Integer;
 
 Function F(n : Integer) : Integer;
   Begin
-    If n = 0 Then x, y, z := 1, 3, 3+4 Else F, x := N * F (N - 1), 5;
+    If n = 0 Then F := 1 Else F := N * F (N - 1);
   End;
 
 Begin
   For n := 1 To 7 Do
     Begin
       Call WriteLn;
-      Call WriteI( F(i));
+      Call WriteI( F(n));
     End;
 End. (* Factorial *)

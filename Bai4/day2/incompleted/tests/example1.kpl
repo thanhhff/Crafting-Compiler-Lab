@@ -1,0 +1,8 @@
+Program Example1; (* Example 1 *)
+CONST MAX = 10;
+Begin
+    FOR  I:=1  TO  4  DO  
+        CALL  WRITEC(' ');
+        C :=  READC;  
+        CALL  WRITEC(C)
+End. (* Example 1 *)
