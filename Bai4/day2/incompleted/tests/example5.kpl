@@ -3,8 +3,8 @@ const c = 1;
 type t = char;
 
 function f(i : integer):char;
-    const b = c;
-    type a = array(.5.) of t;
+const b = c;
+type a = array(.5.) of t;
 Begin
 End;
 Begin
