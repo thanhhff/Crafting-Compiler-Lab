@@ -1,0 +1,13 @@
+PROGRAM exercise4;
+VAR I : INTEGER;
+    J : INTEGER;
+    N : INTEGER;
+    A : ARRAY(.5.) OF ARRAY(.5.) OF INTEGER;
+
+BEGIN
+    N := 5;
+    FOR I := 0 TO N DO
+        FOR J := 0 TO N DO 
+            A(.I.)(.J.) := 0;
+
+END.

@@ -1,0 +1,20 @@
+program exercise1;
+VAR N : INTEGER;
+
+FUNCTION WD(N : INTEGER) : CHAR;
+    BEGIN
+    IF N = 1 THEN WD := 'C'
+    ELSE IF N = 2 THEN WD := 'H'
+    ELSE IF N = 3 THEN WD := 'B'
+    ELSE IF N = 4 THEN WD := 'T'
+    ELSE IF N = 5 THEN WD := 'N'
+    ELSE IF N = 6 THEN WD := 'S'
+    ELSE IF N = 7 THEN WD := 'A'
+    ELSE WD := '0';
+    END;
+
+
+BEGIN
+    N := READI;
+    CALL WRITEC(WD(N));
+END.

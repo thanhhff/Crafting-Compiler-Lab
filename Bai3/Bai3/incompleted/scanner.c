@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "reader.h"
 #include "charcode.h"
@@ -54,32 +55,30 @@ void skipComment()
 
 Token *readIdentKeyword(void)
 {
-  Token *token = makeToken(TK_NONE, lineNo, colNo);
-  int count = 1;
+  int ln = lineNo;
+  int cn = colNo;
+  Token *token = makeToken(TK_IDENT, ln, cn);
+  int i = 0;
 
-  token->string[0] = (char)currentChar;
-  readChar();
-
-  while ((currentChar != EOF) &&
-         ((charCodes[currentChar] == CHAR_LETTER) || (charCodes[currentChar] == CHAR_DIGIT)))
+  while (currentChar != EOF && (charCodes[currentChar] == CHAR_LETTER || charCodes[currentChar] == CHAR_DIGIT || currentChar == 95))
   {
-    if (count <= MAX_IDENT_LEN)
-      token->string[count++] = (char)currentChar;
+    // Giới hạn 15 kí tự
+    if (i >= 15)
+      error(ERR_IDENTTOOLONG, ln, cn);
+    token->string[i] = (char)currentChar;
+    i++;
     readChar();
   }
+  token->string[i] = '\0';
 
-  if (count > MAX_IDENT_LEN)
+  TokenType tokenType = checkKeyword(token->string);
+  if (tokenType != TK_NONE)
   {
-    error(ERR_IDENTTOOLONG, token->lineNo, token->colNo);
-    return token;
+    // // Kiểm tra từ khoá viết chữ thường
+    // if (*token->string != tolower(*token->string))
+    //   error(ERR_INVALIDARGUMENTS, ln, cn);
+    token->tokenType = tokenType;
   }
-
-  token->string[count] = '\0';
-  token->tokenType = checkKeyword(token->string);
-
-  if (token->tokenType == TK_NONE)
-    token->tokenType = TK_IDENT;
-
   return token;
 }
 

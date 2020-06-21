@@ -1,0 +1,24 @@
+PROGRAM EXERCISE2;
+
+VAR A : ARRAY(.10.) OF INTEGER;
+    N : INTEGER;
+    I : INTEGER;
+    K : INTEGER;
+
+BEGIN
+    N := READI;
+    FOR I := 1 TO N DO
+        BEGIN 
+        A(.I.) := READI;
+        END;
+    
+    K := READI;
+    FOR I := 1 TO N DO 
+        BEGIN
+        IF A(.I.) = K THEN
+            CALL WRITEI(1)
+        ELSE
+            CALL WRITEI(0)
+        END;
+END.
+

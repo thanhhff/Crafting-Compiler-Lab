@@ -1,0 +1,21 @@
+PROGRAM EXERCISE3;
+VAR I : INTEGER;
+    N : CHAR;
+
+FUNCTION CV(N : CHAR) : CHAR;
+    BEGIN
+    IF N = 'A' THEN CV := V 
+    ELSE IF N = 'I' THEN CV := V
+    ELSE IF N = 'U' THEN CV := V
+    ELSE IF N = 'E' THEN CV := V
+    ELSE IF N = 'O' THEN CV := V
+    ELSE CV := C 
+    END;
+
+BEGIN 
+    FOR I := 'A' TO 'Z' DO
+    BEGIN
+        CALL WRITELN;
+        CALL WRITEC(CV(I));
+    END;
+END.
