@@ -1,0 +1,8 @@
+program bai2;
+var x : integer;
+    n : integer;
+
+begin 
+    n := n**2;
+   
+end.
